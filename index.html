@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DarkCode AI — Portfolio</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0a0a0a; color: #e0e0e0; min-height: 100vh; display: flex; justify-content: center; padding: 60px 20px; }
+  .page { max-width: 700px; width: 100%; }
+  h1 { font-size: 36px; font-weight: 800; color: #fff; margin-bottom: 8px; }
+  .tagline { color: #888; font-size: 16px; margin-bottom: 48px; }
+  .cards { display: flex; flex-direction: column; gap: 20px; }
+  a.card { display: block; background: #111; border: 1px solid #222; border-radius: 12px; padding: 24px; text-decoration: none; color: inherit; transition: border-color 0.2s, transform 0.2s; }
+  a.card:hover { border-color: #444; transform: translateY(-2px); }
+  .card-badge { display: inline-block; font-size: 10px; font-weight: 600; letter-spacing: 1.5px; padding: 4px 10px; border-radius: 12px; text-transform: uppercase; margin-bottom: 12px; }
+  .badge-blue { background: #00d4ff15; color: #00d4ff; border: 1px solid #00d4ff33; }
+  .badge-purple { background: #a855f715; color: #a855f7; border: 1px solid #a855f733; }
+  .badge-amber { background: #f59e0b15; color: #f59e0b; border: 1px solid #f59e0b33; }
+  .card h2 { font-size: 20px; color: #fff; margin-bottom: 6px; }
+  .card p { font-size: 14px; color: #888; line-height: 1.5; }
+  .card-stats { display: flex; gap: 16px; margin-top: 14px; }
+  .card-stat { font-size: 12px; color: #666; }
+  .card-stat b { color: #ccc; }
+  .footer { margin-top: 60px; text-align: center; color: #333; font-size: 12px; }
+  .footer a { color: #555; }
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>DarkCode AI</h1>
+  <p class="tagline">AI systems that work while you sleep. — darkcodeai@proton.me</p>
+
+  <div class="cards">
+    <a class="card" href="demo_chatbot.html">
+      <div class="card-badge badge-blue">AI Chatbot</div>
+      <h2>SmileBright Dental — AI Receptionist</h2>
+      <p>24/7 chatbot that books appointments, answers FAQs, and captures leads automatically.</p>
+      <div class="card-stats">
+        <div class="card-stat"><b>847</b> convos/mo</div>
+        <div class="card-stat"><b>92%</b> auto-resolved</div>
+        <div class="card-stat"><b>4 days</b> to build</div>
+      </div>
+    </a>
+
+    <a class="card" href="demo_automation_dashboard.html">
+      <div class="card-badge badge-purple">Lead Automation</div>
+      <h2>RevFlow CRM — Lead Automation System</h2>
+      <p>End-to-end pipeline: lead capture, AI qualification, CRM sync, and email sequences.</p>
+      <div class="card-stats">
+        <div class="card-stat"><b>1,247</b> leads/mo</div>
+        <div class="card-stat"><b>186h</b> saved</div>
+        <div class="card-stat"><b>12 days</b> to build</div>
+      </div>
+    </a>
+
+    <a class="card" href="demo_before_after.html">
+      <div class="card-badge badge-amber">Before & After</div>
+      <h2>PeakFit Gym — Customer Service Automation</h2>
+      <p>Replaced 6-step manual inquiry process with AI-powered instant response system.</p>
+      <div class="card-stats">
+        <div class="card-stat"><b>23 min → 3 sec</b> response</div>
+        <div class="card-stat"><b>+38%</b> leads</div>
+        <div class="card-stat"><b>$6,350/mo</b> saved</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="footer">
+    DarkCode AI — AI systems that work while you sleep. — <a href="mailto:darkcodeai@proton.me">darkcodeai@proton.me</a>
+  </div>
+</div>
+</body>
+</html>

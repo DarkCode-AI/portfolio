@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DarkCode AI — Automation Dashboard Demo</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0a0a0a; color: #e0e0e0; min-height: 100vh; padding: 40px 20px; display: flex; justify-content: center; }
+
+  .page { max-width: 1000px; width: 100%; }
+  .badge { display: inline-block; background: #1a1a2e; color: #a855f7; font-size: 11px; font-weight: 600; letter-spacing: 1.5px; padding: 6px 14px; border-radius: 20px; border: 1px solid #a855f733; margin-bottom: 16px; text-transform: uppercase; }
+  h1 { font-size: 28px; font-weight: 700; margin-bottom: 6px; color: #fff; }
+  .subtitle { color: #888; font-size: 14px; margin-bottom: 32px; }
+
+  .dashboard { background: #111; border-radius: 12px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.5); border: 1px solid #222; }
+  .dash-bar { background: #1a1a1a; padding: 12px 16px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #222; }
+  .dot { width: 12px; height: 12px; border-radius: 50%; }
+  .dot-r { background: #ff5f57; }
+  .dot-y { background: #ffbd2e; }
+  .dot-g { background: #28c840; }
+  .url-bar { flex: 1; background: #0a0a0a; border-radius: 6px; padding: 6px 12px; font-size: 12px; color: #666; margin-left: 8px; }
+
+  .dash-body { display: flex; min-height: 520px; }
+
+  .sidebar { width: 200px; background: #0d0d1a; border-right: 1px solid #222; padding: 20px 0; }
+  .sidebar-logo { padding: 0 16px 20px; font-weight: 700; font-size: 16px; color: #a855f7; border-bottom: 1px solid #1a1a2e; margin-bottom: 12px; }
+  .nav-item { padding: 10px 16px; font-size: 13px; color: #666; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: all 0.2s; }
+  .nav-item:hover { color: #aaa; background: #1a1a1a; }
+  .nav-item.active { color: #a855f7; background: #1a1a2e; border-right: 2px solid #a855f7; }
+  .nav-icon { width: 16px; text-align: center; }
+
+  .content { flex: 1; padding: 24px; }
+  .content-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+  .content-header h2 { font-size: 20px; color: #fff; }
+  .time-range { background: #1a1a1a; border: 1px solid #333; border-radius: 6px; padding: 6px 12px; font-size: 12px; color: #888; }
+
+  .kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
+  .kpi { background: #1a1a1a; border: 1px solid #222; border-radius: 10px; padding: 16px; }
+  .kpi-label { font-size: 11px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+  .kpi-value { font-size: 26px; font-weight: 700; }
+  .kpi-change { font-size: 11px; margin-top: 4px; }
+  .up { color: #22c55e; }
+  .down { color: #ef4444; }
+  .purple { color: #a855f7; }
+  .blue { color: #3b82f6; }
+  .green { color: #22c55e; }
+  .amber { color: #f59e0b; }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+
+  .card { background: #1a1a1a; border: 1px solid #222; border-radius: 10px; padding: 16px; }
+  .card-title { font-size: 13px; font-weight: 600; color: #aaa; margin-bottom: 14px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+  .workflow { display: flex; flex-direction: column; gap: 8px; }
+  .wf-row { display: flex; align-items: center; gap: 10px; padding: 8px 10px; background: #111; border-radius: 6px; font-size: 12px; }
+  .wf-status { width: 8px; height: 8px; border-radius: 50%; }
+  .wf-status.ok { background: #22c55e; box-shadow: 0 0 6px #22c55e55; }
+  .wf-status.warn { background: #f59e0b; box-shadow: 0 0 6px #f59e0b55; }
+  .wf-name { flex: 1; color: #ccc; }
+  .wf-count { color: #666; font-size: 11px; }
+  .wf-time { color: #555; font-size: 11px; }
+
+  .chart-placeholder { height: 140px; display: flex; align-items: flex-end; gap: 6px; padding: 0 4px; }
+  .bar-group { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .bar { width: 100%; border-radius: 3px 3px 0 0; min-height: 4px; transition: height 0.3s; }
+  .bar-label { font-size: 9px; color: #555; }
+
+  .log-table { width: 100%; }
+  .log-row { display: flex; gap: 8px; padding: 6px 0; border-bottom: 1px solid #1a1a1a; font-size: 11px; }
+  .log-time { color: #555; width: 60px; }
+  .log-type { width: 70px; font-weight: 600; }
+  .log-msg { flex: 1; color: #999; }
+  .log-type.success { color: #22c55e; }
+  .log-type.trigger { color: #3b82f6; }
+  .log-type.webhook { color: #a855f7; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="badge">Portfolio — AI Automation</div>
+  <h1>RevFlow CRM — Lead Automation System</h1>
+  <p class="subtitle">End-to-end automation: lead capture → AI qualification → CRM sync → email sequences. Built in 12 days.</p>
+
+  <div class="dashboard">
+    <div class="dash-bar">
+      <div class="dot dot-r"></div>
+      <div class="dot dot-y"></div>
+      <div class="dot dot-g"></div>
+      <div class="url-bar">app.revflow.io/dashboard</div>
+    </div>
+    <div class="dash-body">
+      <div class="sidebar">
+        <div class="sidebar-logo">RevFlow</div>
+        <div class="nav-item active"><span class="nav-icon">📊</span> Dashboard</div>
+        <div class="nav-item"><span class="nav-icon">🤖</span> Automations</div>
+        <div class="nav-item"><span class="nav-icon">👥</span> Leads</div>
+        <div class="nav-item"><span class="nav-icon">📧</span> Sequences</div>
+        <div class="nav-item"><span class="nav-icon">🔗</span> Integrations</div>
+        <div class="nav-item"><span class="nav-icon">⚙️</span> Settings</div>
+      </div>
+      <div class="content">
+        <div class="content-header">
+          <h2>Automation Dashboard</h2>
+          <div class="time-range">Last 30 Days</div>
+        </div>
+
+        <div class="kpi-row">
+          <div class="kpi">
+            <div class="kpi-label">Leads Captured</div>
+            <div class="kpi-value purple">1,247</div>
+            <div class="kpi-change up">+23% vs last month</div>
+          </div>
+          <div class="kpi">
+            <div class="kpi-label">Auto-Qualified</div>
+            <div class="kpi-value blue">892</div>
+            <div class="kpi-change">71.5% qualification rate</div>
+          </div>
+          <div class="kpi">
+            <div class="kpi-label">Emails Sent</div>
+            <div class="kpi-value green">3,841</div>
+            <div class="kpi-change up">42% open rate</div>
+          </div>
+          <div class="kpi">
+            <div class="kpi-label">Hours Saved</div>
+            <div class="kpi-value amber">186</div>
+            <div class="kpi-change">$9,300 in labor value</div>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-title">Active Workflows</div>
+            <div class="workflow">
+              <div class="wf-row">
+                <div class="wf-status ok"></div>
+                <div class="wf-name">Website → Lead Capture → CRM</div>
+                <div class="wf-count">423 runs</div>
+                <div class="wf-time">< 2s</div>
+              </div>
+              <div class="wf-row">
+                <div class="wf-status ok"></div>
+                <div class="wf-name">AI Lead Scoring (Claude)</div>
+                <div class="wf-count">892 scored</div>
+                <div class="wf-time">< 4s</div>
+              </div>
+              <div class="wf-row">
+                <div class="wf-status ok"></div>
+                <div class="wf-name">Welcome Email Sequence</div>
+                <div class="wf-count">756 sent</div>
+                <div class="wf-time">triggers</div>
+              </div>
+              <div class="wf-row">
+                <div class="wf-status ok"></div>
+                <div class="wf-name">Follow-Up (Day 3 / Day 7)</div>
+                <div class="wf-count">512 sent</div>
+                <div class="wf-time">scheduled</div>
+              </div>
+              <div class="wf-row">
+                <div class="wf-status warn"></div>
+                <div class="wf-name">Hot Lead → Slack Alert</div>
+                <div class="wf-count">67 alerts</div>
+                <div class="wf-time">< 1s</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">Weekly Volume</div>
+            <div class="chart-placeholder">
+              <div class="bar-group"><div class="bar" style="height:45px;background:#a855f7;"></div><div class="bar-label">Mon</div></div>
+              <div class="bar-group"><div class="bar" style="height:62px;background:#a855f7;"></div><div class="bar-label">Tue</div></div>
+              <div class="bar-group"><div class="bar" style="height:78px;background:#a855f7;"></div><div class="bar-label">Wed</div></div>
+              <div class="bar-group"><div class="bar" style="height:55px;background:#a855f7;"></div><div class="bar-label">Thu</div></div>
+              <div class="bar-group"><div class="bar" style="height:90px;background:#a855f7;"></div><div class="bar-label">Fri</div></div>
+              <div class="bar-group"><div class="bar" style="height:30px;background:#a855f744;"></div><div class="bar-label">Sat</div></div>
+              <div class="bar-group"><div class="bar" style="height:18px;background:#a855f744;"></div><div class="bar-label">Sun</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Recent Activity</div>
+          <div class="log-table">
+            <div class="log-row"><div class="log-time">2:34 PM</div><div class="log-type success">Success</div><div class="log-msg">Lead #1247 qualified → score 8.7/10 → pushed to HubSpot → Welcome email triggered</div></div>
+            <div class="log-row"><div class="log-time">2:31 PM</div><div class="log-type trigger">Trigger</div><div class="log-msg">New form submission from revflow.io/pricing — lead captured, AI scoring started</div></div>
+            <div class="log-row"><div class="log-time">2:28 PM</div><div class="log-type webhook">Webhook</div><div class="log-msg">Stripe payment received $2,400 — matched to Lead #1198 → status: converted</div></div>
+            <div class="log-row"><div class="log-time">2:15 PM</div><div class="log-type success">Success</div><div class="log-msg">Day-7 follow-up sent to 23 leads — 8 opened within 30 minutes</div></div>
+            <div class="log-row"><div class="log-time">1:58 PM</div><div class="log-type trigger">Trigger</div><div class="log-msg">Hot lead alert: Sarah K. (score 9.2) — enterprise inquiry, $15K budget mentioned</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

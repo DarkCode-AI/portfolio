@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DarkCode AI — Before & After</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0a0a0a; color: #e0e0e0; min-height: 100vh; padding: 40px 20px; display: flex; justify-content: center; }
+
+  .page { max-width: 960px; width: 100%; }
+  .badge { display: inline-block; background: #1a1a2e; color: #f59e0b; font-size: 11px; font-weight: 600; letter-spacing: 1.5px; padding: 6px 14px; border-radius: 20px; border: 1px solid #f59e0b33; margin-bottom: 16px; text-transform: uppercase; }
+  h1 { font-size: 28px; font-weight: 700; margin-bottom: 6px; color: #fff; }
+  .subtitle { color: #888; font-size: 14px; margin-bottom: 32px; }
+
+  .comparison { display: grid; grid-template-columns: 1fr 60px 1fr; gap: 0; margin-bottom: 24px; }
+  .arrow-col { display: flex; align-items: center; justify-content: center; }
+  .arrow { font-size: 32px; color: #22c55e; animation: pulse 2s infinite; }
+
+  .panel { border-radius: 12px; overflow: hidden; border: 1px solid #222; }
+  .panel-before { background: #1a0a0a; border-color: #ef444433; }
+  .panel-after { background: #0a1a0f; border-color: #22c55e33; }
+
+  .panel-header { padding: 16px 20px; font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; }
+  .panel-before .panel-header { background: #2a0a0a; color: #ef4444; border-bottom: 1px solid #ef444422; }
+  .panel-after .panel-header { background: #0a2a10; color: #22c55e; border-bottom: 1px solid #22c55e22; }
+
+  .panel-body { padding: 20px; }
+
+  .process-step { display: flex; align-items: flex-start; gap: 12px; padding: 12px 0; border-bottom: 1px solid #ffffff08; }
+  .process-step:last-child { border-bottom: none; }
+  .step-icon { font-size: 20px; width: 28px; text-align: center; flex-shrink: 0; padding-top: 2px; }
+  .step-content { flex: 1; }
+  .step-title { font-size: 13px; font-weight: 600; color: #ccc; margin-bottom: 3px; }
+  .step-detail { font-size: 12px; color: #666; line-height: 1.4; }
+  .step-time { font-size: 11px; font-weight: 600; margin-top: 4px; }
+  .time-bad { color: #ef4444; }
+  .time-good { color: #22c55e; }
+
+  .totals { display: grid; grid-template-columns: 1fr 60px 1fr; gap: 0; margin-bottom: 32px; }
+  .total-card { border-radius: 10px; padding: 20px; text-align: center; }
+  .total-before { background: #1a0a0a; border: 1px solid #ef444433; }
+  .total-after { background: #0a1a0f; border: 1px solid #22c55e33; }
+  .total-label { font-size: 11px; color: #666; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+  .total-value { font-size: 36px; font-weight: 800; }
+  .total-before .total-value { color: #ef4444; }
+  .total-after .total-value { color: #22c55e; }
+  .total-sub { font-size: 12px; color: #666; margin-top: 6px; }
+
+  .savings { background: linear-gradient(135deg, #0a1a0f, #1a2a1f); border: 1px solid #22c55e33; border-radius: 12px; padding: 28px; text-align: center; margin-bottom: 24px; }
+  .savings-title { font-size: 12px; color: #22c55e; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; }
+  .savings-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .saving-item { }
+  .saving-num { font-size: 28px; font-weight: 800; color: #22c55e; }
+  .saving-label { font-size: 11px; color: #888; margin-top: 4px; }
+
+  .client-quote { background: #111; border: 1px solid #222; border-radius: 12px; padding: 24px; display: flex; gap: 16px; align-items: flex-start; }
+  .quote-avatar { width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg, #f59e0b, #d97706); display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 700; color: #000; flex-shrink: 0; }
+  .quote-text { font-size: 14px; color: #ccc; line-height: 1.6; font-style: italic; }
+  .quote-attr { font-size: 12px; color: #666; margin-top: 8px; font-style: normal; }
+
+  @keyframes pulse { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="badge">Portfolio — Before & After</div>
+  <h1>PeakFit Gym — Customer Service Automation</h1>
+  <p class="subtitle">Replaced 6-step manual inquiry process with AI-powered instant response system.</p>
+
+  <div class="comparison">
+    <div class="panel panel-before">
+      <div class="panel-header">Before — Manual Process</div>
+      <div class="panel-body">
+        <div class="process-step">
+          <div class="step-icon">📧</div>
+          <div class="step-content">
+            <div class="step-title">Customer emails inquiry</div>
+            <div class="step-detail">Questions about membership, classes, pricing land in shared inbox</div>
+            <div class="step-time time-bad">Wait: 0-4 hours</div>
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="step-icon">👀</div>
+          <div class="step-content">
+            <div class="step-title">Staff checks inbox</div>
+            <div class="step-detail">Front desk checks between walk-ins, often missed during rush hours</div>
+            <div class="step-time time-bad">Time: 5-15 min per email</div>
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="step-icon">📋</div>
+          <div class="step-content">
+            <div class="step-title">Manually look up info</div>
+            <div class="step-detail">Check class schedule PDF, pricing sheet, availability in separate system</div>
+            <div class="step-time time-bad">Time: 3-10 min</div>
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="step-icon">✍️</div>
+          <div class="step-content">
+            <div class="step-title">Type response</div>
+            <div class="step-detail">Write personalized email, often copy-pasting from templates</div>
+            <div class="step-time time-bad">Time: 5-10 min</div>
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="step-icon">📊</div>
+          <div class="step-content">
+            <div class="step-title">Log in spreadsheet</div>
+            <div class="step-detail">Manually add lead to Google Sheet for follow-up tracking</div>
+            <div class="step-time time-bad">Time: 2-5 min</div>
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="step-icon">😴</div>
+          <div class="step-content">
+            <div class="step-title">After-hours: no response</div>
+            <div class="step-detail">Evenings, weekends, holidays — inquiries sit until next business day</div>
+            <div class="step-time time-bad">Lost: 40% of leads</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="arrow-col">
+      <div class="arrow">→</div>
+    </div>
+
+    <div class="panel panel-after">
+      <div class="panel-header">After — AI Automation</div>
+      <div class="panel-body">
+        <div class="process-step">
+          <div class="step-icon">💬</div>
+          <div class="step-content">
+            <div class="step-title">Customer asks anything</div>
+            <div class="step-detail">Website chat, email, or WhatsApp — all channels covered 24/7</div>
+            <div class="step-time time-good">Response: < 3 seconds</div>
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="step-icon">🤖</div>
+          <div class="step-content">
+            <div class="step-title">AI responds instantly</div>
+            <div class="step-detail">Trained on all PeakFit info — pricing, classes, trainers, policies</div>
+            <div class="step-time time-good">Accuracy: 96%</div>
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="step-icon">📅</div>
+          <div class="step-content">
+            <div class="step-title">Books trial automatically</div>
+            <div class="step-detail">Checks real-time availability, books class or tour, sends confirmation</div>
+            <div class="step-time time-good">Time: 30 seconds</div>
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="step-icon">📲</div>
+          <div class="step-content">
+            <div class="step-title">Captures lead + syncs CRM</div>
+            <div class="step-detail">Name, email, phone, interests → pushed to CRM automatically</div>
+            <div class="step-time time-good">Automatic — 0 staff time</div>
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="step-icon">📧</div>
+          <div class="step-content">
+            <div class="step-title">Follow-up sequence fires</div>
+            <div class="step-detail">Day 1: welcome + trial reminder. Day 3: check-in. Day 7: special offer.</div>
+            <div class="step-time time-good">Automatic — 0 staff time</div>
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="step-icon">🔔</div>
+          <div class="step-content">
+            <div class="step-title">Staff alerted for hot leads only</div>
+            <div class="step-detail">Complex questions or high-intent leads get Slack ping to manager</div>
+            <div class="step-time time-good">Staff handles 8% only</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="totals">
+    <div class="total-card total-before">
+      <div class="total-label">Time per inquiry</div>
+      <div class="total-value">23 min</div>
+      <div class="total-sub">+ 4h average wait</div>
+    </div>
+    <div class="arrow-col"><div class="arrow">→</div></div>
+    <div class="total-card total-after">
+      <div class="total-label">Time per inquiry</div>
+      <div class="total-value">3 sec</div>
+      <div class="total-sub">24/7 instant response</div>
+    </div>
+  </div>
+
+  <div class="savings">
+    <div class="savings-title">Monthly Impact After 30 Days</div>
+    <div class="savings-grid">
+      <div class="saving-item"><div class="saving-num">127</div><div class="saving-label">Hours Saved</div></div>
+      <div class="saving-item"><div class="saving-num">$6,350</div><div class="saving-label">Labor Cost Saved</div></div>
+      <div class="saving-item"><div class="saving-num">+38%</div><div class="saving-label">More Leads Captured</div></div>
+      <div class="saving-item"><div class="saving-num">+22%</div><div class="saving-label">Trial Conversion Rate</div></div>
+    </div>
+  </div>
+
+  <div class="client-quote">
+    <div class="quote-avatar">M</div>
+    <div>
+      <div class="quote-text">"We used to lose half our evening inquiries because nobody was at the desk. Now every single question gets answered instantly — even at 2 AM. Our trial bookings are up 38% and my staff actually has time to focus on members instead of answering the same 10 questions over and over."</div>
+      <div class="quote-attr">— Mike R., Owner, PeakFit Gym (demo client)</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
